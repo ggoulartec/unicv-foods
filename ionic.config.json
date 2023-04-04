@@ -1,0 +1,7 @@
+{
+  "name": "unicv_ionic",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

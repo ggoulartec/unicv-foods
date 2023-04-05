@@ -1,30 +1,81 @@
 <ion-menu contentId="main-content">
   <ion-header>
-    <ion-toolbar>
-      <ion-title>Categorias</ion-title>
+    <ion-toolbar color="primary">
+      <ion-title class="menu-tittle">Categorias</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-content class="ion-padding">Em breve</ion-content>
+  <ion-content class="ion-padding">Em breve...</ion-content>
 </ion-menu>
 <div class="ion-page" id="main-content">
   <ion-header>
-    <ion-toolbar>
+    <ion-toolbar color="primary">
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
       <ion-title>UniCV Foods</ion-title>
-      <ion-button size="small" slot="end">
+      <ion-button slot="end" size="small">
         <ion-icon name="person-circle-outline"></ion-icon>
       </ion-button>
     </ion-toolbar>
-  </ion-header>
-  <ion-content class="ion-padding">
+
     <ion-toolbar>
-      <ion-slides  pager="false" class="slide-line" [options]="slideOpts">
-        <ion-slide *ngFor="let categoria of categorias; let ix = index" [ngClass]="categoria.codigo == selected ? 'slide-actived' : 'slide-no-actived'" (click)="setSelected(categoria.codigo)">
+      <ion-slides pager="false" class="slide-line" [options]="slideOpts">
+        <ion-slide
+          *ngFor="let categoria of categorias; let ix = index"
+          [ngClass]="categoria.codigo == selected ? 'slide-actived' : 'slide-no-actived'"
+          (click)="setSelected(categoria.codigo)"
+        >
           {{ categoria.nome }}
         </ion-slide>
       </ion-slides>
     </ion-toolbar>
+  </ion-header>
+
+  <ion-content [fullscreen]="true" class="ion-padding">
+    <ion-row>
+      <ion-col
+        size="6"
+        *ngFor="let produto of produtos; let ix = index"
+        [hidden]="!produto.visibled"
+        (click)="setProduto(produto)"
+      >
+        <ion-row>
+          <ion-col size="12" class="card-produto">
+            <ion-row>
+              <ion-col size="12" class="img-produto">
+                <img [src]="pathImg + produto.imagens[0]" />
+              </ion-col>
+            </ion-row>
+
+            <ion-row style="height: 45px">
+              <ion-col size="12" class="titulo-produto">
+                {{produto.nome}}
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col size="12" class="valor-produto">
+                {{ formataValor(produto.valor) }}
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col size="12" class="col-botao-detalhes">
+                <span class="botao-detalhes"> Detalhes </span>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="btn-order">
+      <ion-fab-button>
+        <ion-icon name="cart-outline"></ion-icon>
+        <ion-badge>1</ion-badge>
+      </ion-fab-button>
+    </ion-fab>
   </ion-content>
 </div>
+
+<ion-footer> </ion-footer>

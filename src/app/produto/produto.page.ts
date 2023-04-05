@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProdutoPage {
 
-  public pathImg = '../../assets/img';
+  public pathImg = '../../assets/img/';
   public quantidade = 0;
 
   public produto = {
@@ -17,13 +17,24 @@ export class ProdutoPage {
     categoria: 0,
     descricao: '',
     valor: 0.00,
-    imagens: []
+    imagens: [],
+    visibled: false
   }
 
   constructor(private route: ActivatedRoute) {
     this.route.queryParams.subscribe(params => {
       this.produto = params['produto'];
     });
+  }
+
+  public formataValor(valor: any) {
+    let retorno = "";
+    
+    let formatar = Intl.NumberFormat("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+    retorno = formatar.format(valor)
+    retorno = "R$ " + retorno;
+
+    return retorno;
   }
 
   public increment(){

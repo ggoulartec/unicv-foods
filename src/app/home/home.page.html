@@ -22,7 +22,7 @@
       <ion-slides pager="false" class="slide-line" [options]="slideOpts">
         <ion-slide
           *ngFor="let categoria of categorias; let ix = index"
-          [ngClass]="categoria.codigo == selected ? 'slide-actived' : 'slide-no-actived'"
+          [ngClass]="categoria.codigo === selected ? 'slide-actived' : 'slide-no-actived'"
           (click)="setSelected(categoria.codigo)"
         >
           {{ categoria.nome }}
